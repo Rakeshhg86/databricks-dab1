@@ -1,0 +1,2 @@
+# For a Streamlit app
+command: ['streamlit', 'run', 'app.py']
