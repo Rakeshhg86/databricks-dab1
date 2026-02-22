@@ -1,3 +1,5 @@
+
+# resources/jobs.yaml (corrected)
 resources:
   jobs:
     etl_job:
@@ -5,15 +7,14 @@ resources:
       tasks:
         - task_key: run_books
           notebook_task:
-            # point to the synced workspace path
             notebook_path: ${workspace.file_path}/codebase1/BooksAPI.py
-          base_parameters:
-            env: ${bundle.target}
+            base_parameters:
+              env: ${bundle.target}
 
         - task_key: run_chatbot
           depends_on:
             - task_key: run_books
           notebook_task:
             notebook_path: ${workspace.file_path}/codebase1/chatbotllm.py
-          base_parameters:
-            env: ${bundle.target}
+            base_parameters:
+              env: ${bundle.target}
