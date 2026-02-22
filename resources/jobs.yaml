@@ -5,16 +5,15 @@ resources:
       tasks:
         - task_key: run_books
           notebook_task:
-            notebook_path: ./codebase1/BooksAPI.py     # relative to repo
-            base_parameters:
-              env: ${bundle.target}
-          job_cluster_key: etl_cluster
+            # point to the synced workspace path
+            notebook_path: ${workspace.file_path}/codebase1/BooksAPI.py
+          base_parameters:
+            env: ${bundle.target}
 
         - task_key: run_chatbot
           depends_on:
             - task_key: run_books
           notebook_task:
-            notebook_path: ./codebase1/chatbotllm.py    # second notebook as separate task
-            base_parameters:
-              env: ${bundle.target}
-          job_cluster_key: etl_cluster
+            notebook_path: ${workspace.file_path}/codebase1/chatbotllm.py
+          base_parameters:
+            env: ${bundle.target}
