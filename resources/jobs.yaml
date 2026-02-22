@@ -1,0 +1,20 @@
+resources:
+  jobs:
+    etl_job:
+      name: ${bundle.name}-etl-${bundle.target}
+      tasks:
+        - task_key: run_books
+          notebook_task:
+            notebook_path: ./codebase1/BooksAPI.py     # relative to repo
+            base_parameters:
+              env: ${bundle.target}
+          job_cluster_key: etl_cluster
+
+        - task_key: run_chatbot
+          depends_on:
+            - task_key: run_books
+          notebook_task:
+            notebook_path: ./codebase1/chatbotllm.py    # second notebook as separate task
+            base_parameters:
+              env: ${bundle.target}
+          job_cluster_key: etl_cluster

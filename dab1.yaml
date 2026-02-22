@@ -1,0 +1,46 @@
+# databricks.yml
+bundle:
+  name: databricks-dab1
+  # optional: lock CLI version you test with
+  databricks_cli_version: ">=0.218.0"
+
+include:
+  - ./resources/jobs.yaml   # if you split resources into separate files
+ # - jobs/**/*.yml
+  #- pipelines/**/*.yml
+  
+
+variables:
+  catalog:
+    description: Unity Catalog to use
+    default: main
+  schema:
+    description: Default schema
+    default: ${bundle.target}   # dev/test-based schema
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-7405610865065372.12.azuredatabricks.net/   # e.g., https://adb-xxxxxxxx.y.azuredatabricks.net
+    variables:
+      catalog: main
+      schema: dev
+    # In development mode, schedules are paused and resources are prefixed with [dev <user>].
+    # Optional: turn off source-linked deployment if deploying from workspace UI
+    # presets:
+    #   source_linked_deployment: false
+
+  test:
+    mode: production
+    workspace:
+      host: https://adb-7405611094950970.10.azuredatabricks.net/
+      # strongly recommend an explicit root_path for non-dev targets
+      root_path: /Shared/.bundle/${bundle.name}/${bundle.target}
+    run_as:
+      # For test/production, prefer a service principal or a fixed user to ensure stability
+      service_principal_name: rakesh_nlp@outlook.com
+    variables:
+      catalog: main
+      schema: test
