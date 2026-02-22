@@ -44,7 +44,7 @@ targets:
       root_path: /Workspace/Users/rakesh_nlp@outlook.com/.bundle/${bundle.name}/${bundle.target}
     run_as:
       # For test/production, prefer a service principal or a fixed user to ensure stability
-      service_principal_name: rakesh_nlp@outlook.com
+      user_name: rakesh_nlp@outlook.com
     variables:
       catalog: main
       schema: test
