@@ -41,7 +41,7 @@ targets:
     workspace:
       host: https://adb-7405611094950970.10.azuredatabricks.net/
       # strongly recommend an explicit root_path for non-dev targets
-      root_path: /Shared/.bundle/${bundle.name}/${bundle.target}
+      root_path: /Workspace/Users/rakesh_nlp@outlook.com/.bundle/${bundle.name}/${bundle.target}
     run_as:
       # For test/production, prefer a service principal or a fixed user to ensure stability
       service_principal_name: rakesh_nlp@outlook.com
