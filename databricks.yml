@@ -4,6 +4,10 @@ bundle:
   # optional: lock CLI version you test with
   databricks_cli_version: ">=0.218.0"
 
+sync:
+  paths:
+    - codebase1 
+
 include:
   - ./resources/jobs.yaml   # if you split resources into separate files
  # - jobs/**/*.yml
